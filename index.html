@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Jeux - Mon Portfolio</title>
+
+    <!-- FOND SALLE D'ARCADE ANIMÉ -->
+    <link rel="stylesheet" href="arcade-background.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            padding-top: calc(38vh + 90px); /* espace pour le fond + logo fixe */
+        }
+
+
+        /* Lignes de jeux : 3 + 2 obligatoirement */
+        .games-row {
+            display: grid;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            justify-content: center;
+        }
+
+        /* Ligne 1 : 3 jeux originaux */
+        .games-row.row-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Ligne 2 : 2 nouveaux jeux, centrés */
+        .games-row.row-2 {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 800px; /* même largeur de cartes que la ligne 3 */
+        }
+
+        /* Tablette : 2 colonnes par ligne */
+        @media (max-width: 900px) {
+            .games-row.row-3,
+            .games-row.row-2 {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile : 1 colonne */
+        @media (max-width: 600px) {
+            body { padding-top: calc(26vh + 80px); }
+            .games-row.row-3,
+            .games-row.row-2 {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+        }
+
+        /* CARTE JEU */
+        .game-card {
+            background: rgba(20, 20, 34, 0.96);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff4444;
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            background: #2a2a4e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            overflow: hidden;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-image img {
+            transform: scale(1.08);
+        }
+
+        /* Ajustement image Saut Pixel (format portrait) */
+        .saut-pixel-img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-position: center center;
+            transform: none;
+            background: radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%);
+            border-radius: 8px;
+        }
+
+        /* Ajustement image FNAF (réduite pour voir le personnage entier) */
+        .game-image img.fnaf-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: scale(1.15);
+            border-radius: 8px;
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #ff4444;
+        }
+
+        .game-info p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .game-tag {
+            display: inline-block;
+            background: #ff4444;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 15px;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        /* Tags thématiques néon */
+        .game-tag.tag-orange { background: #ff8800; color: #1a0f00; }
+        .game-tag.tag-pink { background: #ff00aa; color: #fff; }
+        .game-tag.tag-cyan { background: #00f0ff; color: #001a1a; }
+        .game-tag.tag-purple { background: #bd00ff; color: #fff; }
+        .game-tag.tag-red { background: #ff4444; color: #fff; }
+        .game-tag.tag-gray { background: #666; color: #fff; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            margin-top: 60px;
+            background: linear-gradient(0deg, rgba(3,3,5,0.92) 0%, rgba(3,3,5,0) 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SALLE D'ARCADE COMPLÈTE -->
+    <div class="arcade-room">
+        <!-- Brume / vignettage pour la profondeur -->
+        <div class="room-fog"></div>
+
+        <!-- Particules lumineuses flottantes -->
+        <div class="particles-container"></div>
+
+        <!-- Scanlines sur tout le fond -->
+        <div class="scanlines"></div>
+
+        <!-- Plafond avec néons suspendus -->
+        <div class="room-ceiling">
+            <div class="neon-tube tube-cyan"></div>
+            <div class="neon-tube tube-magenta"></div>
+            <div class="neon-tube tube-cyan2"></div>
+            <div class="hanging-sign">OPEN</div>
+        </div>
+
+        <!-- Mur du fond -->
+        <div class="room-back-wall">
+            <div class="wall-sign sign-arcade">ARCADE</div>
+            <div class="wall-sign sign-insert">INSERT COIN</div>
+            <div class="pixel-posters">
+                <div class="poster"></div>
+                <div class="poster"></div>
+                <div class="poster"></div>
+            </div>
+            <div class="shelf">
+                <div class="cartridge"></div>
+                <div class="cartridge"></div>
+                <div class="cartridge"></div>
+                <div class="cartridge"></div>
+                <div class="cartridge"></div>
+            </div>
+        </div>
+
+        <!-- Sol carrelé réfléchissant avec perspective -->
+        <div class="room-floor">
+            <div class="floor-grid"></div>
+            <div class="floor-reflection"></div>
+        </div>
+
+        <!-- Borne gauche (retrait, assombrie) -->
+        <div class="arcade-cabinet cabinet-left" data-parallax="0.07" data-depth="0.7">
+            <div class="cabinet-body">
+                <div class="cabinet-marquee">SNAKE</div>
+                <div class="cabinet-screen screen-snake">
+                    <div class="snake-segment s1"></div>
+                    <div class="snake-segment s2"></div>
+                    <div class="snake-segment s3"></div>
+                    <div class="snake-segment s4"></div>
+                    <div class="snake-food"></div>
+                </div>
+                <div class="control-panel">
+                    <div class="joystick-base">
+                        <div class="joystick-stick">
+                            <div class="joystick-ball"></div>
+                        </div>
+                    </div>
+                    <div class="arcade-button btn-cyan"></div>
+                    <div class="arcade-button btn-magenta"></div>
+                    <div class="arcade-button btn-purple"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Borne centrale (grande, lumineuse) -->
+        <div class="arcade-cabinet cabinet-center" data-parallax="0.02" data-depth="1.0">
+            <div class="cabinet-body">
+                <div class="cabinet-marquee">PONG</div>
+                <div class="cabinet-screen screen-pong">
+                    <div class="pong-ball"></div>
+                    <div class="pong-paddle paddle-left"></div>
+                    <div class="pong-paddle paddle-right"></div>
+                    <div class="pong-score">12 - 08</div>
+                </div>
+                <div class="control-panel">
+                    <div class="joystick-base">
+                        <div class="joystick-stick">
+                            <div class="joystick-ball"></div>
+                        </div>
+                    </div>
+                    <div class="arcade-button btn-cyan"></div>
+                    <div class="arcade-button btn-magenta"></div>
+                    <div class="arcade-button btn-purple"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Borne droite (retrait, assombrie) -->
+        <div class="arcade-cabinet cabinet-right" data-parallax="0.07" data-depth="0.7">
+            <div class="cabinet-body">
+                <div class="cabinet-marquee">BOUNCE</div>
+                <div class="cabinet-screen screen-bounce">
+                    <div class="bounce-ball b1"></div>
+                    <div class="bounce-ball b2"></div>
+                    <div class="bounce-ball b3"></div>
+                </div>
+                <div class="control-panel">
+                    <div class="joystick-base">
+                        <div class="joystick-stick">
+                            <div class="joystick-ball"></div>
+                        </div>
+                    </div>
+                    <div class="arcade-button btn-cyan"></div>
+                    <div class="arcade-button btn-magenta"></div>
+                    <div class="arcade-button btn-purple"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="room-header sticky-logo">
+        <h1>🎮 MON STUDIO</h1>
+        <p>Découvre mes jeux créés avec Godot</p>
+    </header>
+
+    <main class="games-container">
+
+        <!-- LIGNE 1 : les 3 jeux originaux -->
+        <div class="games-row row-3">
+
+        <!-- JEU 1 : FNAF -->
+        <a href="https://sunny-kelpie-9daaab.netlify.app" class="game-card" target="_blank">
+            <div class="game-image">
+                <img class="fnaf-img" src="images/fnaf.png?v=2" alt="FNAF Horror" loading="lazy">
+            </div>
+            <div class="game-info">
+                <h2>FNAF Horror</h2>
+                <p>Survis dans cette maison hantée. Le monstre te guette dans l'obscurité...</p>
+                <span class="game-tag tag-red">Horreur</span>
+                <span class="game-tag tag-gray">3D</span>
+            </div>
+        </a>
+
+        <!-- JEU 2 : Course Folle -->
+        <a href="#" class="game-card">
+            <div class="game-image">
+                <img src="images/course-folle.png" alt="Course Folle" loading="lazy">
+            </div>
+            <div class="game-info">
+                <h2>Course Folle</h2>
+                <p>Jeu de course arcade futuriste. À venir prochainement !</p>
+                <span class="game-tag tag-orange">Racing</span>
+                <span class="game-tag tag-gray">À venir</span>
+            </div>
+        </a>
+
+        <!-- JEU 3 : RPG Aventure -->
+        <a href="#" class="game-card">
+            <div class="game-image">
+                <img src="images/rpg-aventure.jpg" alt="RPG Aventure" loading="lazy">
+            </div>
+            <div class="game-info">
+                <h2>RPG Aventure</h2>
+                <p>Explore un monde fantastique. En développement...</p>
+                <span class="game-tag tag-purple">RPG</span>
+                <span class="game-tag tag-gray">À venir</span>
+            </div>
+        </a>
+
+        </div>
+
+        <!-- LIGNE 2 : les 2 nouveaux jeux -->
+        <div class="games-row row-2">
+
+        <!-- JEU 4 : Saut Pixel -->
+        <a href="#" class="game-card">
+            <div class="game-image">
+                <img class="saut-pixel-img" src="images/saut-pixel-art.svg" alt="Saut Pixel" loading="lazy">
+            </div>
+            <div class="game-info">
+                <h2>Saut Pixel</h2>
+                <p>Saute à travers les niveaux pixel art. Collecte les pièces et évite les pièges !</p>
+                <span class="game-tag tag-orange">Plateforme</span>
+                <span class="game-tag tag-pink">Pixel Art</span>
+            </div>
+        </a>
+
+        <!-- JEU 5 : Casse-Tête Néon -->
+        <a href="#" class="game-card">
+            <div class="game-image">
+                <img src="images/ChatGPT Image 18 juin 2026, 11_24_20.png" alt="Casse-Tête Néon" loading="lazy">
+            </div>
+            <div class="game-info">
+                <h2>Casse-Tête Néon</h2>
+                <p>Résous des énigmes lumineuses dans un univers cyberpunk. Chaque niveau est un défi !</p>
+                <span class="game-tag tag-cyan">Puzzle</span>
+                <span class="game-tag tag-purple">Néon</span>
+            </div>
+        </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Mon Studio - Fait avec ❤️ et Godot</p>
+    </footer>
+
+    <!-- Scripts du fond arcade -->
+    <script src="arcade-background.js"></script>
+
+</body>
+</html>
