@@ -3,7 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Jeux - Mon Portfolio</title>
+    
+    <!-- SEO - Références pour Google -->
+    <meta name="description" content="Portfolio de jeux vidéo créés avec Godot. Découvrez FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon. Jeux arcade, horreur, racing et puzzle.">
+    <meta name="keywords" content="jeux vidéo, Godot, portfolio, arcade, FNAF, horror, racing, RPG, pixel art, puzzle, néon, jeux en ligne, game dev, indie games">
+    <meta name="author" content="yanime266-debug">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph - Facebook, Discord, LinkedIn -->
+    <meta property="og:title" content="Mon Studio - Portfolio de Jeux Vidéo Godot">
+    <meta property="og:description" content="Découvrez mes jeux créés avec Godot : FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yanime266-debug.github.io/home-page-/">
+    <meta property="og:image" content="https://yanime266-debug.github.io/home-page-/images/rpg-aventure.jpg">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mon Studio - Portfolio de Jeux Vidéo Godot">
+    <meta name="twitter:description" content="Découvrez mes jeux créés avec Godot : FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
+    <meta name="twitter:image" content="https://yanime266-debug.github.io/home-page-/images/rpg-aventure.jpg">
+    
+    <!-- Canonical URL - Évite le contenu dupliqué -->
+    <link rel="canonical" href="https://yanime266-debug.github.io/home-page-/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/fnaf.png">
+    
+    <title>Mon Studio - Portfolio de Jeux Vidéo Godot | FNAF, RPG, Arcade</title>
 
     <!-- FOND SALLE D'ARCADE ANIMÉ -->
     <link rel="stylesheet" href="arcade-background.css">
@@ -21,11 +48,9 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             min-height: 100vh;
             position: relative;
-            padding-top: calc(38vh + 90px); /* espace pour le fond + logo fixe */
+            padding-top: calc(38vh + 90px);
         }
 
-
-        /* Lignes de jeux : 3 + 2 obligatoirement */
         .games-row {
             display: grid;
             gap: 30px;
@@ -35,18 +60,15 @@
             justify-content: center;
         }
 
-        /* Ligne 1 : 3 jeux originaux */
         .games-row.row-3 {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        /* Ligne 2 : 2 nouveaux jeux, centrés */
         .games-row.row-2 {
             grid-template-columns: repeat(2, 1fr);
-            max-width: 800px; /* même largeur de cartes que la ligne 3 */
+            max-width: 800px;
         }
 
-        /* Tablette : 2 colonnes par ligne */
         @media (max-width: 900px) {
             .games-row.row-3,
             .games-row.row-2 {
@@ -55,7 +77,6 @@
             }
         }
 
-        /* Mobile : 1 colonne */
         @media (max-width: 600px) {
             body { padding-top: calc(26vh + 80px); }
             .games-row.row-3,
@@ -65,7 +86,6 @@
             }
         }
 
-        /* CARTE JEU */
         .game-card {
             background: rgba(20, 20, 34, 0.96);
             border-radius: 15px;
@@ -108,7 +128,6 @@
             transform: scale(1.08);
         }
 
-        /* Ajustement image Saut Pixel (format portrait) */
         .saut-pixel-img {
             object-fit: contain;
             width: 100%;
@@ -119,7 +138,6 @@
             border-radius: 8px;
         }
 
-        /* Ajustement image FNAF (réduite pour voir le personnage entier) */
         .game-image img.fnaf-img {
             width: 100%;
             height: 100%;
@@ -154,7 +172,6 @@
             box-shadow: 0 0 8px currentColor;
         }
 
-        /* Tags thématiques néon */
         .game-tag.tag-orange { background: #ff8800; color: #1a0f00; }
         .game-tag.tag-pink { background: #ff00aa; color: #fff; }
         .game-tag.tag-cyan { background: #00f0ff; color: #001a1a; }
@@ -162,7 +179,6 @@
         .game-tag.tag-red { background: #ff4444; color: #fff; }
         .game-tag.tag-gray { background: #666; color: #fff; }
 
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 40px;
@@ -173,19 +189,12 @@
     </style>
 </head>
 <body>
-
     <!-- SALLE D'ARCADE COMPLÈTE -->
     <div class="arcade-room">
-        <!-- Brume / vignettage pour la profondeur -->
         <div class="room-fog"></div>
-
-        <!-- Particules lumineuses flottantes -->
         <div class="particles-container"></div>
-
-        <!-- Scanlines sur tout le fond -->
         <div class="scanlines"></div>
 
-        <!-- Plafond avec néons suspendus -->
         <div class="room-ceiling">
             <div class="neon-tube tube-cyan"></div>
             <div class="neon-tube tube-magenta"></div>
@@ -193,7 +202,6 @@
             <div class="hanging-sign">OPEN</div>
         </div>
 
-        <!-- Mur du fond -->
         <div class="room-back-wall">
             <div class="wall-sign sign-arcade">ARCADE</div>
             <div class="wall-sign sign-insert">INSERT COIN</div>
@@ -211,13 +219,11 @@
             </div>
         </div>
 
-        <!-- Sol carrelé réfléchissant avec perspective -->
         <div class="room-floor">
             <div class="floor-grid"></div>
             <div class="floor-reflection"></div>
         </div>
 
-        <!-- Borne gauche (retrait, assombrie) -->
         <div class="arcade-cabinet cabinet-left" data-parallax="0.07" data-depth="0.7">
             <div class="cabinet-body">
                 <div class="cabinet-marquee">SNAKE</div>
@@ -241,7 +247,6 @@
             </div>
         </div>
 
-        <!-- Borne centrale (grande, lumineuse) -->
         <div class="arcade-cabinet cabinet-center" data-parallax="0.02" data-depth="1.0">
             <div class="cabinet-body">
                 <div class="cabinet-marquee">PONG</div>
@@ -264,7 +269,6 @@
             </div>
         </div>
 
-        <!-- Borne droite (retrait, assombrie) -->
         <div class="arcade-cabinet cabinet-right" data-parallax="0.07" data-depth="0.7">
             <div class="cabinet-body">
                 <div class="cabinet-marquee">BOUNCE</div>
@@ -294,79 +298,68 @@
 
     <main class="games-container">
 
-        <!-- LIGNE 1 : les 3 jeux originaux -->
         <div class="games-row row-3">
+            <a href="https://sunny-kelpie-9daaab.netlify.app" class="game-card" target="_blank" rel="noopener noreferrer">
+                <div class="game-image">
+                    <img class="fnaf-img" src="images/fnaf.png?v=2" alt="FNAF Horror - Jeu d'horreur 3D créé avec Godot" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>FNAF Horror</h2>
+                    <p>Survis dans cette maison hantée. Le monstre te guette dans l'obscurité...</p>
+                    <span class="game-tag tag-red">Horreur</span>
+                    <span class="game-tag tag-gray">3D</span>
+                </div>
+            </a>
 
-        <!-- JEU 1 : FNAF -->
-        <a href="https://sunny-kelpie-9daaab.netlify.app" class="game-card" target="_blank">
-            <div class="game-image">
-                <img class="fnaf-img" src="images/fnaf.png?v=2" alt="FNAF Horror" loading="lazy">
-            </div>
-            <div class="game-info">
-                <h2>FNAF Horror</h2>
-                <p>Survis dans cette maison hantée. Le monstre te guette dans l'obscurité...</p>
-                <span class="game-tag tag-red">Horreur</span>
-                <span class="game-tag tag-gray">3D</span>
-            </div>
-        </a>
+            <a href="#" class="game-card">
+                <div class="game-image">
+                    <img src="images/course-folle.png" alt="Course Folle - Jeu de course arcade futuriste" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>Course Folle</h2>
+                    <p>Jeu de course arcade futuriste. À venir prochainement !</p>
+                    <span class="game-tag tag-orange">Racing</span>
+                    <span class="game-tag tag-gray">À venir</span>
+                </div>
+            </a>
 
-        <!-- JEU 2 : Course Folle -->
-        <a href="#" class="game-card">
-            <div class="game-image">
-                <img src="images/course-folle.png" alt="Course Folle" loading="lazy">
-            </div>
-            <div class="game-info">
-                <h2>Course Folle</h2>
-                <p>Jeu de course arcade futuriste. À venir prochainement !</p>
-                <span class="game-tag tag-orange">Racing</span>
-                <span class="game-tag tag-gray">À venir</span>
-            </div>
-        </a>
-
-        <!-- JEU 3 : RPG Aventure -->
-        <a href="#" class="game-card">
-            <div class="game-image">
-                <img src="images/rpg-aventure.jpg" alt="RPG Aventure" loading="lazy">
-            </div>
-            <div class="game-info">
-                <h2>RPG Aventure</h2>
-                <p>Explore un monde fantastique. En développement...</p>
-                <span class="game-tag tag-purple">RPG</span>
-                <span class="game-tag tag-gray">À venir</span>
-            </div>
-        </a>
-
+            <a href="#" class="game-card">
+                <div class="game-image">
+                    <img src="images/rpg-aventure.jpg" alt="RPG Aventure - Jeu de rôle fantastique en développement" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>RPG Aventure</h2>
+                    <p>Explore un monde fantastique. En développement...</p>
+                    <span class="game-tag tag-purple">RPG</span>
+                    <span class="game-tag tag-gray">À venir</span>
+                </div>
+            </a>
         </div>
 
-        <!-- LIGNE 2 : les 2 nouveaux jeux -->
         <div class="games-row row-2">
+            <a href="#" class="game-card">
+                <div class="game-image">
+                    <img class="saut-pixel-img" src="images/saut-pixel-art.svg" alt="Saut Pixel - Jeu de plateforme pixel art" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>Saut Pixel</h2>
+                    <p>Saute à travers les niveaux pixel art. Collecte les pièces et évite les pièges !</p>
+                    <span class="game-tag tag-orange">Plateforme</span>
+                    <span class="game-tag tag-pink">Pixel Art</span>
+                </div>
+            </a>
 
-        <!-- JEU 4 : Saut Pixel -->
-        <a href="#" class="game-card">
-            <div class="game-image">
-                <img class="saut-pixel-img" src="images/saut-pixel-art.svg" alt="Saut Pixel" loading="lazy">
-            </div>
-            <div class="game-info">
-                <h2>Saut Pixel</h2>
-                <p>Saute à travers les niveaux pixel art. Collecte les pièces et évite les pièges !</p>
-                <span class="game-tag tag-orange">Plateforme</span>
-                <span class="game-tag tag-pink">Pixel Art</span>
-            </div>
-        </a>
-
-        <!-- JEU 5 : Casse-Tête Néon -->
-        <a href="#" class="game-card">
-            <div class="game-image">
-                <img src="images/ChatGPT Image 18 juin 2026, 11_24_20.png" alt="Casse-Tête Néon" loading="lazy">
-            </div>
-            <div class="game-info">
-                <h2>Casse-Tête Néon</h2>
-                <p>Résous des énigmes lumineuses dans un univers cyberpunk. Chaque niveau est un défi !</p>
-                <span class="game-tag tag-cyan">Puzzle</span>
-                <span class="game-tag tag-purple">Néon</span>
-            </div>
-        </a>
-
+            <a href="#" class="game-card">
+                <div class="game-image">
+                    <img src="images/ChatGPT Image 18 juin 2026, 11_24_20.png" alt="Casse-Tête Néon - Puzzle lumineux cyberpunk" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>Casse-Tête Néon</h2>
+                    <p>Résous des énigmes lumineuses dans un univers cyberpunk. Chaque niveau est un défi !</p>
+                    <span class="game-tag tag-cyan">Puzzle</span>
+                    <span class="game-tag tag-purple">Néon</span>
+                </div>
+            </a>
         </div>
 
     </main>
@@ -375,7 +368,6 @@
         <p>© 2026 Mon Studio - Fait avec ❤️ et Godot</p>
     </footer>
 
-    <!-- Scripts du fond arcade -->
     <script src="arcade-background.js"></script>
 
 </body>
