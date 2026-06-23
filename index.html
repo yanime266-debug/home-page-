@@ -8,14 +8,14 @@
     <meta name="google-site-verification" content="OSL6E-oqMcXiU69EiIh0c-DTegh929bXTuA1iVTt-kA" />
     
     <!-- SEO - Références pour Google -->
-    <meta name="description" content="Goto Arcade Jeux Gratuits - Portfolio de jeux vidéo créés avec Godot. Découvrez FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon. Jeux arcade, horreur, racing et puzzle gratuits.">
-    <meta name="keywords" content="jeux gratuits, arcade, Godot, FNAF, horror, racing, RPG, pixel art, puzzle, néon, jeux en ligne, game dev, indie games, goto arcade">
+    <meta name="description" content="Goto Arcade Jeux Gratuits - Portfolio de jeux vidéo créés avec Godot. Découvrez FNAF Horror, Mytharia, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon. Jeux arcade, horreur, racing et puzzle gratuits.">
+    <meta name="keywords" content="jeux gratuits, arcade, Godot, FNAF, Mytharia, horror, racing, RPG, pixel art, puzzle, néon, jeux en ligne, game dev, indie games, goto arcade">
     <meta name="author" content="yanime266-debug">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph - Facebook, Discord, LinkedIn -->
     <meta property="og:title" content="Goto Arcade Jeux Gratuits - Jeux Vidéo Indépendants">
-    <meta property="og:description" content="Découvrez nos jeux gratuits créés avec Godot : FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
+    <meta property="og:description" content="Découvrez nos jeux gratuits créés avec Godot : FNAF Horror, Mytharia, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yanime266-debug.github.io/home-page-/">
     <meta property="og:image" content="https://yanime266-debug.github.io/home-page-/images/rpg-aventure.jpg">
@@ -24,7 +24,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Goto Arcade Jeux Gratuits - Jeux Vidéo Indépendants">
-    <meta name="twitter:description" content="Découvrez nos jeux gratuits créés avec Godot : FNAF Horror, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
+    <meta name="twitter:description" content="Découvrez nos jeux gratuits créés avec Godot : FNAF Horror, Mytharia, Course Folle, RPG Aventure, Saut Pixel et Casse-Tête Néon.">
     <meta name="twitter:image" content="https://yanime266-debug.github.io/home-page-/images/rpg-aventure.jpg">
     
     <!-- Canonical URL -->
@@ -33,7 +33,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/fnaf.png">
     
-    <title>Goto Arcade Jeux Gratuits - Jeux Vidéo Indépendants | FNAF, RPG, Arcade</title>
+    <title>Goto Arcade Jeux Gratuits - Jeux Vidéo Indépendants | FNAF, Mytharia, RPG, Arcade</title>
 
     <!-- FOND SALLE D'ARCADE ANIMÉ -->
     <link rel="stylesheet" href="arcade-background.css">
@@ -149,6 +149,14 @@
             border-radius: 8px;
         }
 
+        .game-image img.mytharia-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            border-radius: 8px;
+        }
+
         .game-info {
             padding: 20px;
         }
@@ -181,6 +189,7 @@
         .game-tag.tag-purple { background: #bd00ff; color: #fff; }
         .game-tag.tag-red { background: #ff4444; color: #fff; }
         .game-tag.tag-gray { background: #666; color: #fff; }
+        .game-tag.tag-green { background: #00ff88; color: #001a0a; }
 
         footer {
             text-align: center;
@@ -301,7 +310,10 @@
 
     <main class="games-container">
 
+        <!-- LIGNE 1 : 3 jeux -->
         <div class="games-row row-3">
+            
+            <!-- FNAF -->
             <a href="https://sunny-kelpie-9daaab.netlify.app" class="game-card" target="_blank" rel="noopener noreferrer">
                 <div class="game-image">
                     <img class="fnaf-img" src="images/fnaf.png?v=2" alt="FNAF Horror - Jeu d'horreur 3D gratuit" loading="lazy">
@@ -314,6 +326,20 @@
                 </div>
             </a>
 
+            <!-- MYTHARIA - CORRIGÉ -->
+            <a href="https://glittering-taiyaki-4c68e3.netlify.app" class="game-card">
+                <div class="game-image">
+                    <img class="mytharia-img" src="images/rpg-aventure.jpg" alt="Mytharia - 5v5 Arena TPS gratuit" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h2>Mytharia</h2>
+                    <p>Combat en arène 5v5. Capture les totems, échange tes monstres et domine le champ de bataille !</p>
+                    <span class="game-tag tag-green">TPS</span>
+                    <span class="game-tag tag-purple">5v5 Arena</span>
+                </div>
+            </a>
+
+            <!-- COURSE FOLLE -->
             <a href="#" class="game-card">
                 <div class="game-image">
                     <img src="images/course-folle.png" alt="Course Folle - Jeu de course arcade gratuit" loading="lazy">
@@ -326,20 +352,12 @@
                 </div>
             </a>
 
-            <a href="#" class="game-card">
-                <div class="game-image">
-                    <img src="images/rpg-aventure.jpg" alt="RPG Aventure - Jeu de rôle fantastique gratuit" loading="lazy">
-                </div>
-                <div class="game-info">
-                    <h2>RPG Aventure</h2>
-                    <p>Explore un monde fantastique. En développement...</p>
-                    <span class="game-tag tag-purple">RPG</span>
-                    <span class="game-tag tag-gray">À venir</span>
-                </div>
-            </a>
         </div>
 
+        <!-- LIGNE 2 : 2 jeux -->
         <div class="games-row row-2">
+            
+            <!-- SAUT PIXEL -->
             <a href="#" class="game-card">
                 <div class="game-image">
                     <img class="saut-pixel-img" src="images/saut-pixel-art.svg" alt="Saut Pixel - Jeu de plateforme pixel art gratuit" loading="lazy">
@@ -352,6 +370,7 @@
                 </div>
             </a>
 
+            <!-- CASSE-TÊTE NÉON -->
             <a href="#" class="game-card">
                 <div class="game-image">
                     <img src="images/ChatGPT Image 18 juin 2026, 11_24_20.png" alt="Casse-Tête Néon - Puzzle lumineux cyberpunk gratuit" loading="lazy">
@@ -363,6 +382,7 @@
                     <span class="game-tag tag-purple">Néon</span>
                 </div>
             </a>
+            
         </div>
 
     </main>
